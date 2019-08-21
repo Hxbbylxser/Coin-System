@@ -1,0 +1,77 @@
+package org.cookiegames.coinapi;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+
+public class CoinApi {
+	
+	public static Integer getCoins(UUID uuid) {
+        File file = new File("plugins/CoinSystem", "coins.yml");
+        FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+
+        int money = cfg.getInt(uuid + ".coins");
+        return money;
+
+    }
+
+    public static void addCoins(UUID uuid, int amount) {
+        File file = new File("plugins/CoinSystem", "coins.yml");
+        FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+
+        int money = cfg.getInt(uuid + ".coins");
+        money = money+amount;
+        cfg.set(uuid + ".coins", money);
+        try {
+            cfg.save(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void removeCoins(UUID uuid, int amount) {
+        File file = new File("plugins/CoinSystem", "coins.yml");
+        FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+
+        int money = cfg.getInt(uuid + ".coins");
+        money = money-amount;
+        cfg.set(uuid + ".coins", money);
+        try {
+            cfg.save(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void setCoins(UUID uuid, int amount) {
+        File file = new File("plugins/CoinSystem", "coins.yml");
+        FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+
+        cfg.set(uuid + ".coins", amount);
+        try {
+            cfg.save(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public static boolean hasEnoughCoins(UUID uuid, int amount) {
+        File file = new File("plugins/CoinSystem", "coins.yml");
+        FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+
+        int money = cfg.getInt(uuid + ".coins");
+        if(money >= amount) {
+            return true;
+        }else
+            return false;
+
+    }
+
+}
