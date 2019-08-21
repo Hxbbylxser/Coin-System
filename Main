@@ -1,0 +1,32 @@
+package org.cookiegames.main;
+
+import org.bukkit.plugin.java.JavaPlugin;
+import org.cookiegames.commands.CoinInfo_Command;
+import org.cookiegames.commands.Eco_Command;
+import org.cookiegames.commands.Money_Command;
+import org.cookiegames.commands.Pay_Command;
+
+
+public class Main extends JavaPlugin {
+	
+	@Override
+	public void onEnable() {
+		System.out.println("Plugin erfolgreich geladen!");
+		getCommand("money").setExecutor(new Money_Command());
+		getCommand("bal").setExecutor(new Money_Command());
+		getCommand("balance").setExecutor(new Money_Command());
+		getCommand("pay").setExecutor(new Pay_Command());
+		getCommand("eco").setExecutor(new Eco_Command());
+		getCommand("economy").setExecutor(new Eco_Command());
+		getCommand("coininfo").setExecutor(new CoinInfo_Command());
+		
+		
+	}
+	@Override
+	public void onDisable( ) {
+		System.out.println("Plugin erfolgreich geladen!");
+	}
+
+	
+
+}
